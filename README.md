@@ -52,7 +52,7 @@ docker run --name db -e MYSQL_USER=test -e MYSQL_PASSWORD=test -e MYSQL_DATABASE
 For WEB:
 ==========
 
-docker run -d --name web --link db -p 8000:80  -e MYSQL_ROOT_PASSWORD=tests -e MYSQL_USERNAME=tests -e MYSQL_PASSWORD=tests -e MYSQL_DATABASE=register -e MYSQL_HOST=db  web-php
+docker run -d --name web --link db -p 8000:80  -e MYSQL_ROOT_PASSWORD=test -e MYSQL_USERNAME=test -e MYSQL_PASSWORD=test -e MYSQL_DATABASE=register -e MYSQL_HOST=db  web-php
 
 ```
 
