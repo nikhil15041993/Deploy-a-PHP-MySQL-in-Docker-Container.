@@ -8,9 +8,15 @@ define('DB_DATABASE',getenv('MYSQL_DATABASE'));
 
 $con = mysqli_connect(DB_HOST,DB_USERNAME,DB_PASSWORD,DB_DATABASE);
 
-// Check connection
-if (mysqli_connect_errno())
-  {
-  echo "Failed to connect to MySQL: " . mysqli_connect_error();
+if(!$con)
+{
+	print("Not Connected<br>".mysql_error());
+
 }
+else
+{
+	echo("Connected");
+}
+
+
 ?>
