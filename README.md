@@ -14,15 +14,15 @@
 #MySQL database
 
 FROM  mariadb:latest
-LABEL maintainer="vineet kumar"
 COPY *.sh /docker-entrypoint-initdb.d/
+COPY *.sql /docker-entrypoint-initdb.d/
 
 ```
 
 ```
 #Docker file for PHP web
 
-From  vineetkumar03/php:7.4-alpine
+From  php:7.4-alpine
 ADD src /app/public
 ENV MYSQL_HOST localhost
 ENV MYSQL_USERNAME test
