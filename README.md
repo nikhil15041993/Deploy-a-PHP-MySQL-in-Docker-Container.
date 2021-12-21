@@ -31,4 +31,47 @@ ENV MYSQL_DATABASE register
 RUN chown -R www-data:www-data /app
 
 ```
+### Create Image From Dokcerfile
 
+```
+docker build -t web-php .
+
+dokcer build -t db-php . 
+
+```
+
+### 1. Link PHP container with MySQL container’s name
+
+```
+
+For Database:
+============
+
+docker run --name db -e MYSQL_USER=test -e MYSQL_PASSWORD=test -e MYSQL_DATABASE=register -e MYSQL_ROOT_PASSWORD=test -p 3306:3306  -d  db-php
+
+For WEB:
+==========
+
+docker run -d --name web --link db -p 8000:80  -e MYSQL_ROOT_PASSWORD=tests -e MYSQL_USERNAME=tests -e MYSQL_PASSWORD=tests -e MYSQL_DATABASE=register -e MYSQL_HOST=db  web-php
+
+```
+
+
+### 2. Create a docker network and run both container same network
+
+
+```
+docker network create mynetwork
+```
+
+```
+For Database:
+=============
+
+docker run --name db --net mynetwork -e MYSQL_USER=test -e MYSQL_PASSWORD=test -e MYSQL_DATABASE=register -e MYSQL_ROOT_PASSWORD=test -p 3306:3306  -d  db-php
+
+For WEB:
+=======
+
+docker run -d --name web --net mynetwork -p 8000:80  -e MYSQL_ROOT_PASSWORD=test -e MYSQL_USERNAME=test -e MYSQL_PASSWORD=test -e MYSQL_DATABASE=register -e MYSQL_HOST=db  web-php
+```
