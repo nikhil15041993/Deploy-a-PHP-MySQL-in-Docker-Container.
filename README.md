@@ -75,3 +75,36 @@ For WEB:
 
 docker run -d --name web --net mynetwork -p 8000:80  -e MYSQL_ROOT_PASSWORD=test -e MYSQL_USERNAME=test -e MYSQL_PASSWORD=test -e MYSQL_DATABASE=register -e MYSQL_HOST=db  web-php
 ```
+
+
+dockercompose
+============
+
+```
+nginx:    
+      build: ./nginx/  
+      container_name: nginx-container  
+      ports:  
+       - 80:80  
+      links:  
+       - php  
+      volumes_from:  
+       - app-data  
+
+    php:    
+      image: php:7.0-fpm  
+      container_name: php-container  
+      expose:  
+       - 9000  
+      volumes_from:  
+       - app-data  
+
+    app-data:    
+      image: php:7.0-fpm  
+      container_name: app-data-container  
+      volumes:  
+       - ./www/html/:/var/www/html/  
+      command: "true"
+      
+      
+      ```
